@@ -3,6 +3,9 @@ package me.guillaume.recruitment.tournament;
 
 import org.junit.jupiter.api.Test;
 
+import me.kami.recruitment.tournament.Swordsman;
+import me.kami.recruitment.tournament.Viking;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 

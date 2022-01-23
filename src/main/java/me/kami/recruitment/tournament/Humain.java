@@ -18,11 +18,12 @@ public abstract class Humain {
 	
 	protected int damage;
 	protected List<String> equipement;
-	protected int selfNbRound=1;
+	protected int selfNbRound=0;
 	//compte sa durabilite en meme temps
 	protected int buckler=-1;
 	protected boolean armor=false;
 	protected int attackRate;
+	protected int bonusDamage=0;
 	
 	
 	

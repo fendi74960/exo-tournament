@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Swordsman extends Humain {
 	
+	private int poisonNb=0;
+	
 	public Swordsman() {
 		this.setHitPoints(100);
 		this.damage=5;
@@ -11,12 +13,32 @@ public class Swordsman extends Humain {
 		//on considere case 0 comme l'arme
 		this.equip("sword");
 	}
+	public Swordsman(String type) {
+		this();
+		switch (type) {
+			case "Vicious":
+				this.equipement.set(0, "axe");
+				this.damage=6;
+				this.poisonNb=2;
+				break;
+	
+			default:
+				break;
+		}
+
+		
+	}
 	
 	@Override
 	public void engage(Humain other) {
 		//fait damage
 		//on considere case 0 comme l'arme
-		other.getHit(damage, this.equipement.get(0));
+		if(this.poisonNb>0){
+			bonusDamage+=20;
+			this.poisonNb-=1;
+		}
+		other.getHit(damage+bonusDamage, this.equipement.get(0));
+		bonusDamage=0;
 		
 		
 		//Check si other est mort si non alors continue le combat
@@ -30,16 +52,19 @@ public class Swordsman extends Humain {
 	@Override
 	protected void getHit(int damage,String arme) {
 		//Ici equivalent nombre de coup recu pour le bouclier
-		selfNbRound+=1;
+		
 		if(armor) {
 			damage-=3;
 		}
 		if(buckler>0 && selfNbRound%2==0) {
 			damage=0;
+			System.out.println("block");
 			if(arme.equals("axe")) {
 				buckler-=1;
 			}
 		}
+		selfNbRound+=1;
+		
 		
 		setHitPoints(hitPoints()-damage);
 		if(hitPoints()<0)
@@ -51,15 +76,15 @@ public class Swordsman extends Humain {
 		this.equipement.add(equipment);
 		//pour eviter le parcours de liste
 		switch (equipment) {
-		case "buckler":
-			buckler=3;
-			break;
-		case "armor":
-			armor=true;
-			damage-=1;
-			break;
-		default:
-			break;
+			case "buckler":
+				buckler=3;
+				break;
+			case "armor":
+				armor=true;
+				damage-=1;
+				break;
+			default:
+				break;
 		}
 		return this;
 	}

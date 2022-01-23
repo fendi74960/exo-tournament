@@ -1,6 +1,8 @@
 package me.kami.recruitment.tournament;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Humain {
 	private int hitPoints;
@@ -19,6 +21,8 @@ public abstract class Humain {
 	protected int selfNbRound=1;
 	//compte sa durabilite en meme temps
 	protected int buckler=-1;
+	protected boolean armor=false;
+	protected int attackRate;
 	
 	
 	
